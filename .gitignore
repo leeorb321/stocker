@@ -1,0 +1,11 @@
+**/.ipynb_checkpoints
+**/*.ipynb
+*/**/*.yml
+**/__pycache__
+**/.DS_Store
+*.pyc
+build/
+dist/
+tmp/**/*
+instance/*.py
+.python-version
