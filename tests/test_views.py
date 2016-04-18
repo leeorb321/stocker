@@ -20,10 +20,15 @@ class TestViews(unittest.TestCase):
         self.assertIn(expected_index_page_text, actual_response_body)
 
 
-    def test_stock_ticker_details(self):
+    @patch('stocker.views.StockQuote')
+    def test_stock_ticker_details(self, mock_stock_quote):
         ticker_symbol = 'AAPL'
+        stock_price = 15.83
+        mock_stock_quote.return_value.current_price.return_value = stock_price
 
-        response = self.APP.get('/stock_ticker/AAPL')
+        response = self.APP.get('/stock_ticker/' + ticker_symbol)
         actual_response_body = str(response.data)
 
         self.assertIn(ticker_symbol, actual_response_body)
+        self.assertIn(str(stock_price), actual_response_body)
+
